@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Objective Voice Toolkit — Page 2: Evidence → Analysis</title>
+
+  <style>
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --ink:#111827;
+      --muted:#4b5563;
+      --border:#e5e7eb;
+      --accent:#1f2937;
+      --warn:#fff7ed;
+      --warnBorder:#fed7aa;
+      --ok:#ecfdf5;
+      --okBorder:#a7f3d0;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.45;
+    }
+    header{
+      padding:26px 18px 14px;
+      max-width:980px;
+      margin:0 auto;
+    }
+    h1{
+      margin:0 0 6px;
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .sub{margin:0;color:var(--muted);font-size:14px}
+    .wrap{max-width:980px;margin:0 auto;padding:0 18px 40px}
+    .stickyTop{
+      position:sticky;
+      top:0;
+      background:var(--bg);
+      padding:10px 0 8px;
+      z-index:5;
+      border-bottom:1px solid rgba(229,231,235,.8);
+      backdrop-filter: blur(6px);
+    }
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:14px 0 18px;
+    }
+    .pill{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--accent);
+      text-decoration:none;
+    }
+    .pill:hover{border-color:#cbd5e1}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px;
+      box-shadow: 0 1px 0 rgba(17,24,39,.03);
+    }
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+    @media (max-width: 860px){.grid{grid-template-columns:1fr}}
+    h2{margin:0 0 10px;font-size:16px;font-weight:800}
+    h3{margin:18px 0 8px;font-size:14px;font-weight:800}
+    p{margin:10px 0}
+    .small{font-size:13px;color:var(--muted)}
+    .note{
+      background:var(--warn);
+      border:1px solid var(--warnBorder);
+      border-radius:12px;
+      padding:12px;
+      color:#7c2d12;
+      font-size:14px;
+    }
+    .ok{
+      background:var(--ok);
+      border:1px solid var(--okBorder);
+      border-radius:12px;
+      padding:12px;
+      color:#065f46;
+      font-size:14px;
+    }
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width: 860px){.two{grid-template-columns:1fr}}
+    textarea, input[type="text"], select{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:14px;
+      font-family: inherit;
+      background:#fff;
+    }
+    textarea{min-height:110px;resize:vertical}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    button{
+      appearance:none;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:10px;
+      padding:9px 11px;
+      font-size:13px;
+      cursor:pointer;
+      color:var(--accent);
+    }
+    button:hover{border-color:#cbd5e1}
+    button.primary{
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
+    }
+    button.primary:hover{filter:brightness(.95)}
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:12px;
+      padding:2px 6px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#fff;
+      color:var(--muted);
+    }
+    .practiceItem{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+      background:#fff;
+      margin-top:10px;
+    }
+    .practiceItem .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
+    .tag{
+      font-size:12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:4px 8px;
+      color:var(--muted);
+      background:#fff;
+    }
+    .answerKey{
+      display:none;
+      margin-top:10px;
+      border-top:1px dashed var(--border);
+      padding-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .drawer{
+      margin-top:10px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+      background:#fafafa;
+    }
+    .drawer h4{margin:0 0 8px;font-size:13px;font-weight:800}
+    .checklist label{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      margin:8px 0;
+      font-size:14px;
+    }
+    .footer{margin-top:18px;font-size:12px;color:var(--muted)}
+
+    /* ---------- PRINT STYLES (Save as PDF) ---------- */
+    @media print {
+      :root { --bg:#fff; --card:#fff; --border:#000; }
+      body { background:#fff !important; }
+      header { padding:0; }
+      .stickyTop, .nav, .btnrow, button, .pill { display:none !important; }
+      .wrap { padding:0; max-width:none; }
+      .card{
+        box-shadow:none !important;
+        border:1px solid #000 !important;
+        border-radius:0 !important;
+        page-break-inside: avoid;
+        margin:0 0 12px 0;
+      }
+      .note, .ok, .drawer{
+        border:1px solid #000 !important;
+        border-radius:0 !important;
+        background:#fff !important;
+        color:#000 !important;
+      }
+      textarea, input[type="text"], select{
+        border:1px solid #000 !important;
+        border-radius:0 !important;
+      }
+      textarea{min-height:140px}
+      a { color:#000 !important; text-decoration:none !important; }
+      #printHelp { display:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Objective Voice Toolkit — Page 2: Evidence → Analysis</h1>
+    <p class="sub">The point of this page: stop dropping a quote/paraphrase and then just repeating it. Evidence needs explanation.</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- Student info + submission instructions -->
+    <section class="card" id="studentInfo">
+      <h2>Before you start (for submission)</h2>
+
+      <div class="two">
+        <div>
+          <label class="small" for="studentName"><strong>Name</strong></label>
+          <input id="studentName" type="text" placeholder="First + last name" />
+        </div>
+        <div>
+          <label class="small" for="studentClass"><strong>Class / Section</strong></label>
+          <input id="studentClass" type="text" placeholder="Example: ENGL&101 (T/TH 9:30)" />
+        </div>
+      </div>
+
+      <div class="two" style="margin-top:10px">
+        <div>
+          <label class="small" for="studentDate"><strong>Date</strong></label>
+          <input id="studentDate" type="text" placeholder="Example: March 3, 2026" />
+        </div>
+        <div>
+          <label class="small" for="studentTopic"><strong>Topic / Career you chose (optional)</strong></label>
+          <input id="studentTopic" type="text" placeholder="Example: Registered nurse" />
+        </div>
+      </div>
+
+      <div class="note" id="printHelp" style="margin-top:12px">
+        <strong>How to turn this in:</strong>
+        <ol style="margin:8px 0 0 18px">
+          <li>Type your work directly in the boxes on this page.</li>
+          <li>Click <strong>Print / Save as PDF</strong>.</li>
+          <li>Choose <strong>Save as PDF</strong>, save the file, and upload it to Canvas.</li>
+        </ol>
+      </div>
+
+      <div class="btnrow">
+        <button class="primary" id="btnPrint">Print / Save as PDF</button>
+      </div>
+    </section>
+
+    <div class="stickyTop">
+      <div class="nav">
+        <a class="pill" href="#lesson">Mini lesson</a>
+        <a class="pill" href="#sorting">Repetition vs. analysis</a>
+        <a class="pill" href="#builder">Build your analysis</a>
+        <a class="pill" href="#check">Self-check</a>
+      </div>
+    </div>
+
+    <!-- Part 1: Mini lesson -->
+    <section class="card" id="lesson">
+      <h2>1) Mini lesson: evidence is not analysis</h2>
+
+      <div class="note">
+        <strong>The problem:</strong> Students use a quote/paraphrase and then their next sentence just restates the same information.
+        That is <strong>repetition</strong>, not analysis.
+      </div>
+
+      <div class="ok" style="margin-top:12px">
+        <strong>The fix:</strong> After any quote/paraphrase, write 3 sentences:
+        <ol style="margin:8px 0 0 18px">
+          <li><strong>This means…</strong> (translate the evidence)</li>
+          <li><strong>This matters because…</strong> (so what?)</li>
+          <li><strong>This connects to my claim by…</strong> (link back)</li>
+        </ol>
+      </div>
+
+      <h3>Example (nursing)</h3>
+      <div class="two">
+        <div class="drawer">
+          <h4>Evidence (paraphrase + placeholder citation)</h4>
+          <p style="margin:0">
+            The Bureau of Labor Statistics describes registered nurses as providing and coordinating patient care, educating patients, and
+            administering treatments. <span class="kbd">(BLS)</span>
+          </p>
+        </div>
+        <div class="drawer">
+          <h4>Analysis (3-sentence rule)</h4>
+          <p style="margin:0">
+            <strong>This means</strong> the role involves both medical tasks and communication responsibilities, not just “helping people.”<br>
+            <strong>This matters because</strong> the daily work includes emotional labor and high responsibility, which can affect stress and job satisfaction.<br>
+            <strong>This connects to my claim by</strong> showing that whether nursing is a “good fit” depends on the kind of work a person wants to do, not only job growth.
+          </p>
+        </div>
+      </div>
+
+      <p class="small" style="margin-top:10px">
+        Note: you are allowed to say a career is “rewarding” or “great,” but you need evidence and explanation. You can’t just drop the word and move on.
+      </p>
+    </section>
+
+    <!-- Part 2: Sorting practice -->
+    <section class="card" id="sorting" style="margin-top:14px">
+      <h2>2) Practice: repetition vs. analysis</h2>
+      <p class="small">
+        Below are “after the evidence” sentences. Label each one:
+        <span class="kbd">R</span> repetition (restates the source) •
+        <span class="kbd">A</span> analysis (explains meaning, importance, connection, limitation, etc.)
+      </p>
+
+      <div id="sortList"></div>
+
+      <div class="btnrow">
+        <button id="btnShowKey">Show answer key</button>
+        <button id="btnHideKey">Hide answer key</button>
+      </div>
+
+      <div class="answerKey" id="answerKey">
+        <strong>Answer key (with quick why):</strong>
+        <ol>
+          <li><strong>R</strong> — just repeats “nurses educate patients.”</li>
+          <li><strong>A</strong> — explains what the duties suggest about skills and workload.</li>
+          <li><strong>R</strong> — restates “jobs are projected to grow.”</li>
+          <li><strong>A</strong> — adds meaning + limitation (growth ≠ easy or perfect).</li>
+          <li><strong>R</strong> — re-says “many settings,” no “so what.”</li>
+          <li><strong>A</strong> — connects evidence to a claim about flexibility and fit.</li>
+          <li><strong>R</strong> — repeats “long shifts,” no interpretation.</li>
+          <li><strong>A</strong> — interprets impact + connects to claim (tradeoff).</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Part 3: Build your analysis -->
+    <section class="card" id="builder" style="margin-top:14px">
+      <h2>3) Build your analysis (Option A + small Option C)</h2>
+      <p class="small">
+        Step 1: Paste one paraphrase or short quote (and add a citation placeholder).<br>
+        Step 2: Write the 3 required analysis sentences.<br>
+        Step 3 (small Option C): choose one “analysis move” and add one more sentence.
+      </p>
+
+      <div class="two">
+        <div>
+          <h3>Evidence (quote or paraphrase + citation placeholder)</h3>
+          <textarea id="evidenceBox" placeholder="Example: The BLS lists that registered nurses assess patients, administer treatments, and educate patients. (BLS)"></textarea>
+          <p class="small">Keep the evidence short. You can use a paraphrase if you want.</p>
+        </div>
+        <div>
+          <h3>Your claim (1 sentence)</h3>
+          <textarea id="claimBox" placeholder="Example: Nursing may offer stable employment, but the work can be demanding and requires strong communication skills."></textarea>
+          <p class="small">This is what your analysis should connect back to.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:14px">The 3-sentence rule (required)</h3>
+      <div class="two">
+        <div>
+          <label class="small" for="meansBox"><strong>This means…</strong></label>
+          <textarea id="meansBox" placeholder="Translate your evidence in your own words. What does it show?"></textarea>
+        </div>
+        <div>
+          <label class="small" for="mattersBox"><strong>This matters because…</strong></label>
+          <textarea id="mattersBox" placeholder="Why does this evidence matter? What does it change for your reader?"></textarea>
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <label class="small" for="connectsBox"><strong>This connects to my claim by…</strong></label>
+        <textarea id="connectsBox" placeholder="Explain how the evidence supports, complicates, or limits your claim."></textarea>
+      </div>
+
+      <h3 style="margin-top:14px">Choose 1 “analysis move” (small Option C)</h3>
+      <p class="small">Pick one move and add one more sentence. This is how you go deeper instead of just summarizing.</p>
+
+      <div class="two">
+        <div>
+          <label class="small" for="moveSelect"><strong>Analysis move</strong></label>
+          <select id="moveSelect">
+            <option value="">— choose one —</option>
+            <option value="implication">Implication: what this suggests</option>
+            <option value="complicate">Complicate: tradeoff or limitation</option>
+            <option value="compare">Compare: compared to another path</option>
+            <option value="define">Define: define a key term</option>
+            <option value="scope">Scope: for who/where this applies</option>
+          </select>
+          <div class="btnrow">
+            <button id="btnInsertStem">Insert a stem</button>
+            <button id="btnCheck">Check my analysis</button>
+          </div>
+          <p class="small" id="checkMsg">Tip: your “analysis” should not just repeat your evidence with different words.</p>
+        </div>
+
+        <div>
+          <label class="small" for="moveBox"><strong>Your extra sentence (based on the move)</strong></label>
+          <textarea id="moveBox" placeholder="Write your extra sentence here."></textarea>
+        </div>
+      </div>
+
+      <div class="btnrow">
+        <button id="btnCopyAll">Copy my work (all boxes)</button>
+      </div>
+    </section>
+
+    <section class="card" id="check" style="margin-top:14px">
+      <h2>4) Self-check before you submit</h2>
+      <div class="checklist">
+        <label><input type="checkbox"> I filled out my name/class/date at the top.</label>
+        <label><input type="checkbox"> I included evidence + a citation placeholder (BLS, OOH, etc.).</label>
+        <label><input type="checkbox"> I wrote all 3 required analysis sentences (means/matters/connects).</label>
+        <label><input type="checkbox"> My analysis adds meaning, not just repetition.</label>
+        <label><input type="checkbox"> I chose one analysis move and wrote an extra sentence.</label>
+        <label><input type="checkbox"> I saved as a PDF and uploaded it to Canvas.</label>
+      </div>
+
+      <div class="footer">
+        Reminder: if your “analysis” sentence could be replaced with “This shows ___” and nothing changes, it’s probably repetition.
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Print button
+    document.getElementById("btnPrint").addEventListener("click", () => window.print());
+
+    // Auto-fill date
+    (function autofillDate(){
+      const dateInput = document.getElementById("studentDate");
+      if(dateInput && !dateInput.value){
+        const d = new Date();
+        const opts = { year: "numeric", month: "long", day: "numeric" };
+        dateInput.value = d.toLocaleDateString(undefined, opts);
+      }
+    })();
+
+    // Sorting practice content
+    const sortItems = [
+      { text: "This shows nurses educate patients about health conditions.", key: "R" },
+      { text: "This suggests nurses need strong communication skills in addition to medical knowledge.", key: "A" },
+      { text: "This means nursing jobs are projected to grow.", key: "R" },
+      { text: "This matters because projected growth may increase opportunities, but it does not guarantee high pay or low stress.", key: "A" },
+      { text: "This shows nurses can work in many different settings.", key: "R" },
+      { text: "This connects to my claim by showing the career can offer flexibility depending on the setting someone chooses.", key: "A" },
+      { text: "This means nurses often work long shifts.", key: "R" },
+      { text: "This complicates the idea that the career is automatically a good fit, because long shifts can impact work-life balance.", key: "A" }
+    ];
+
+    const sortList = document.getElementById("sortList");
+    const answerKey = document.getElementById("answerKey");
+
+    function escapeHtml(str){
+      return str.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+    }
+
+    function renderSorting(){
+      sortList.innerHTML = "";
+      sortItems.forEach((item, i) => {
+        const div = document.createElement("div");
+        div.className = "practiceItem";
+        div.innerHTML = `
+          <div><strong>${i+1}.</strong> ${escapeHtml(item.text)}</div>
+          <div class="row">
+            <span class="tag">Choose: R / A</span>
+            <select aria-label="Choose R or A">
+              <option value="">—</option>
+              <option value="R">R (repetition)</option>
+              <option value="A">A (analysis)</option>
+            </select>
+            <span class="small" data-result></span>
+          </div>
+        `;
+        const sel = div.querySelector("select");
+        const res = div.querySelector("[data-result]");
+        sel.addEventListener("change", () => {
+          if(!sel.value){ res.textContent = ""; return; }
+          res.textContent = sel.value === item.key ? "✓" : "Not quite";
+        });
+        sortList.appendChild(div);
+      });
+    }
+
+    document.getElementById("btnShowKey").addEventListener("click", () => {
+      answerKey.style.display = "block";
+    });
+    document.getElementById("btnHideKey").addEventListener("click", () => {
+      answerKey.style.display = "none";
+    });
+
+    // Analysis move stems (small Option C)
+    const moveStems = {
+      implication: [
+        "This suggests ______ for people considering this career.",
+        "This implies that ______, especially when ______."
+      ],
+      complicate: [
+        "However, this does not account for ______, which could change the conclusion.",
+        "A limitation is ______, so this evidence does not prove ______."
+      ],
+      compare: [
+        "Compared to ______, this suggests ______.",
+        "Unlike ______, this role requires ______."
+      ],
+      define: [
+        "Here, “______” means ______ (not just ______).",
+        "In this context, “______” refers to ______, which matters because ______."
+      ],
+      scope: [
+        "This may apply most in ______ settings, but not necessarily in ______.",
+        "This seems especially true for ______, although ______ may experience it differently."
+      ]
+    };
+
+    document.getElementById("btnInsertStem").addEventListener("click", () => {
+      const sel = document.getElementById("moveSelect").value;
+      const box = document.getElementById("moveBox");
+      const msg = document.getElementById("checkMsg");
+      if(!sel){
+        msg.textContent = "Choose an analysis move first.";
+        return;
+      }
+      const stems = moveStems[sel];
+      const pick = stems[Math.floor(Math.random() * stems.length)];
+      box.value = box.value ? (box.value + "\n" + pick) : pick;
+      msg.textContent = "Stem added. Fill in the blanks with specifics.";
+    });
+
+    // Simple "analysis check"
+    document.getElementById("btnCheck").addEventListener("click", () => {
+      const evidence = (document.getElementById("evidenceBox").value || "").trim().toLowerCase();
+      const means = (document.getElementById("meansBox").value || "").trim();
+      const matters = (document.getElementById("mattersBox").value || "").trim();
+      const connects = (document.getElementById("connectsBox").value || "").trim();
+      const move = (document.getElementById("moveBox").value || "").trim();
+      const msg = document.getElementById("checkMsg");
+
+      const missing = [];
+      if(!evidence) missing.push("evidence");
+      if(!means) missing.push("This means");
+      if(!matters) missing.push("This matters");
+      if(!connects) missing.push("This connects");
+      if(missing.length){
+        msg.textContent = "Missing: " + missing.join(", ") + ".";
+        return;
+      }
+
+      // crude repetition flag: if "means" repeats a lot of evidence words
+      const evidenceWords = evidence.split(/\s+/).filter(w => w.length >= 5);
+      const meansLower = means.toLowerCase();
+      let overlap = 0;
+      evidenceWords.slice(0, 30).forEach(w => { if(meansLower.includes(w)) overlap++; });
+
+      if(overlap >= 8){
+        msg.textContent = "Possible repetition: your “This means…” looks very close to the evidence. Try adding interpretation (what it suggests / why it matters).";
+        return;
+      }
+
+      if(move && move.toLowerCase().includes("this shows")){
+        msg.textContent = "Reminder: “This shows…” often turns into repetition. Try implication, tradeoff, limitation, or connection to your claim.";
+        return;
+      }
+
+      msg.textContent = "Looks good. Make sure your “connects” sentence clearly links back to your claim.";
+    });
+
+    // Copy all work
+    document.getElementById("btnCopyAll").addEventListener("click", async () => {
+      const parts = [
+        ["Name", document.getElementById("studentName").value],
+        ["Class/Section", document.getElementById("studentClass").value],
+        ["Date", document.getElementById("studentDate").value],
+        ["Topic", document.getElementById("studentTopic").value],
+        ["Claim", document.getElementById("claimBox").value],
+        ["Evidence", document.getElementById("evidenceBox").value],
+        ["This means", document.getElementById("meansBox").value],
+        ["This matters because", document.getElementById("mattersBox").value],
+        ["This connects to my claim by", document.getElementById("connectsBox").value],
+        ["Extra sentence (analysis move)", document.getElementById("moveBox").value]
+      ];
+
+      const text = parts
+        .filter(([k,v]) => (v || "").trim().length)
+        .map(([k,v]) => `${k}:\n${v.trim()}\n`)
+        .join("\n");
+
+      try{
+        await navigator.clipboard.writeText(text);
+        document.getElementById("checkMsg").textContent = "Copied. You can paste this into Canvas if needed.";
+      }catch(e){
+        document.getElementById("checkMsg").textContent = "Copy didn’t work in this browser. You can manually select + copy.";
+      }
+    });
+
+    // Init
+    renderSorting();
+  </script>
+</body>
+</html>
