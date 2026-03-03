@@ -178,6 +178,14 @@
       font-size:14px;
     }
     .footer{margin-top:18px;font-size:12px;color:var(--muted)}
+    .evidenceBox{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:12px;
+      padding:12px;
+      margin-top:8px;
+      font-size:14px;
+    }
 
     /* ---------- PRINT STYLES (Save as PDF) ---------- */
     @media print {
@@ -193,7 +201,7 @@
         page-break-inside: avoid;
         margin:0 0 12px 0;
       }
-      .note, .ok, .drawer{
+      .note, .ok, .drawer, .evidenceBox{
         border:1px solid #000 !important;
         border-radius:0 !important;
         background:#fff !important;
@@ -262,7 +270,7 @@
       <div class="nav">
         <a class="pill" href="#lesson">Mini lesson</a>
         <a class="pill" href="#sorting">Repetition vs. analysis</a>
-        <a class="pill" href="#builder">Build your analysis</a>
+        <a class="pill" href="#builder">Revise your draft analysis</a>
         <a class="pill" href="#check">Self-check</a>
       </div>
     </div>
@@ -309,14 +317,16 @@
       </p>
     </section>
 
-    <!-- Part 2: Sorting practice -->
+    <!-- Part 2: Sorting practice (with evidence included) -->
     <section class="card" id="sorting" style="margin-top:14px">
-      <h2>2) Practice: repetition vs. analysis</h2>
-      <p class="small">
-        Below are “after the evidence” sentences. Label each one:
-        <span class="kbd">R</span> repetition (restates the source) •
+      <h2>2) Practice: repetition vs. analysis (with the evidence included)</h2>
+
+      <div class="note">
+        <strong>Directions:</strong> Each item includes <strong>Evidence</strong> (what a student might quote/paraphrase) and one
+        <strong>After-evidence sentence</strong>. Label the after-evidence sentence:
+        <span class="kbd">R</span> repetition (restates the evidence) •
         <span class="kbd">A</span> analysis (explains meaning, importance, connection, limitation, etc.)
-      </p>
+      </div>
 
       <div id="sortList"></div>
 
@@ -326,43 +336,57 @@
       </div>
 
       <div class="answerKey" id="answerKey">
-        <strong>Answer key (with quick why):</strong>
+        <strong>Answer key (quick why):</strong>
         <ol>
-          <li><strong>R</strong> — just repeats “nurses educate patients.”</li>
-          <li><strong>A</strong> — explains what the duties suggest about skills and workload.</li>
-          <li><strong>R</strong> — restates “jobs are projected to grow.”</li>
-          <li><strong>A</strong> — adds meaning + limitation (growth ≠ easy or perfect).</li>
-          <li><strong>R</strong> — re-says “many settings,” no “so what.”</li>
-          <li><strong>A</strong> — connects evidence to a claim about flexibility and fit.</li>
-          <li><strong>R</strong> — repeats “long shifts,” no interpretation.</li>
-          <li><strong>A</strong> — interprets impact + connects to claim (tradeoff).</li>
+          <li><strong>R</strong> — repeats the education point, no “so what.”</li>
+          <li><strong>A</strong> — interprets what that duty suggests about skills/labor.</li>
+          <li><strong>R</strong> — repeats growth, no meaning/limits.</li>
+          <li><strong>A</strong> — adds implication + limitation (growth ≠ guaranteed comfort).</li>
+          <li><strong>R</strong> — restates “many settings.”</li>
+          <li><strong>A</strong> — connects flexibility to a claim about fit.</li>
+          <li><strong>R</strong> — repeats physical demands, no interpretation.</li>
+          <li><strong>A</strong> — interprets the tradeoff and links back to a claim.</li>
         </ol>
       </div>
     </section>
 
-    <!-- Part 3: Build your analysis -->
+    <!-- Part 3: Revise-from-draft builder -->
     <section class="card" id="builder" style="margin-top:14px">
-      <h2>3) Build your analysis (Option A + small Option C)</h2>
-      <p class="small">
-        Step 1: Paste one paraphrase or short quote (and add a citation placeholder).<br>
-        Step 2: Write the 3 required analysis sentences.<br>
-        Step 3 (small Option C): choose one “analysis move” and add one more sentence.
-      </p>
+      <h2>3) Revise your draft analysis (use your actual draft + your actual in-text citation)</h2>
 
-      <div class="two">
+      <div class="ok">
+        <strong>What to do:</strong>
+        <ol style="margin:8px 0 0 18px">
+          <li>Find a place in your draft where you used <strong>evidence</strong> (quote or paraphrase) and then wrote an “analysis” sentence.</li>
+          <li>Copy/paste that excerpt below (keep your in-text citation exactly as you wrote it).</li>
+          <li>Pull out your evidence sentence and your analysis sentence(s).</li>
+          <li>Rewrite the analysis using the 3-sentence rule.</li>
+          <li>Choose one analysis move to go deeper.</li>
+        </ol>
+      </div>
+
+      <h3 style="margin-top:14px">A) Paste the original excerpt from your draft (3–6 sentences)</h3>
+      <textarea id="draftExcerpt" placeholder="Paste the original excerpt here. It should include: your evidence sentence + your attempted analysis sentence(s). Keep your in-text citation exactly as it appears in your draft."></textarea>
+      <p class="small">Either quote or paraphrase is fine. Keep your in-text citation exactly as written.</p>
+
+      <div class="two" style="margin-top:10px">
         <div>
-          <h3>Evidence (quote or paraphrase + citation placeholder)</h3>
-          <textarea id="evidenceBox" placeholder="Example: The BLS lists that registered nurses assess patients, administer treatments, and educate patients. (BLS)"></textarea>
-          <p class="small">Keep the evidence short. You can use a paraphrase if you want.</p>
+          <h3>B) Evidence sentence (from your draft)</h3>
+          <textarea id="evidenceBox" placeholder="Paste your evidence sentence here (quote or paraphrase) WITH your original in-text citation."></textarea>
+          <p class="small">Example format: ... (BLS) or ... (“Registered Nurses”). Use what you already used in your draft.</p>
         </div>
         <div>
-          <h3>Your claim (1 sentence)</h3>
-          <textarea id="claimBox" placeholder="Example: Nursing may offer stable employment, but the work can be demanding and requires strong communication skills."></textarea>
-          <p class="small">This is what your analysis should connect back to.</p>
+          <h3>C) Your original analysis sentence(s) (from your draft)</h3>
+          <textarea id="oldAnalysisBox" placeholder="Paste the sentence(s) you wrote after the evidence (your attempted analysis)."></textarea>
+          <p class="small">This is the part that often turns into repetition. We’re rewriting it.</p>
         </div>
       </div>
 
-      <h3 style="margin-top:14px">The 3-sentence rule (required)</h3>
+      <h3 style="margin-top:14px">D) Your claim (optional but helpful)</h3>
+      <textarea id="claimBox" placeholder="Optional: paste the claim sentence this evidence is supposed to support. If you don’t have one, skip it."></textarea>
+      <p class="small">If you include your claim, your “connects” sentence will be easier to write.</p>
+
+      <h3 style="margin-top:14px">E) Rewrite your analysis using the 3-sentence rule (required)</h3>
       <div class="two">
         <div>
           <label class="small" for="meansBox"><strong>This means…</strong></label>
@@ -375,11 +399,11 @@
       </div>
       <div style="margin-top:10px">
         <label class="small" for="connectsBox"><strong>This connects to my claim by…</strong></label>
-        <textarea id="connectsBox" placeholder="Explain how the evidence supports, complicates, or limits your claim."></textarea>
+        <textarea id="connectsBox" placeholder="Explain how the evidence supports, complicates, or limits your claim (or your main point)."></textarea>
       </div>
 
-      <h3 style="margin-top:14px">Choose 1 “analysis move” (small Option C)</h3>
-      <p class="small">Pick one move and add one more sentence. This is how you go deeper instead of just summarizing.</p>
+      <h3 style="margin-top:14px">F) Choose 1 “analysis move” (small Option C)</h3>
+      <p class="small">Pick one move and add one more sentence. This is the “go deeper” part.</p>
 
       <div class="two">
         <div>
@@ -396,7 +420,7 @@
             <button id="btnInsertStem">Insert a stem</button>
             <button id="btnCheck">Check my analysis</button>
           </div>
-          <p class="small" id="checkMsg">Tip: your “analysis” should not just repeat your evidence with different words.</p>
+          <p class="small" id="checkMsg">Tip: your “analysis” should add meaning, not just repeat the evidence.</p>
         </div>
 
         <div>
@@ -408,15 +432,21 @@
       <div class="btnrow">
         <button id="btnCopyAll">Copy my work (all boxes)</button>
       </div>
+
+      <div class="note" style="margin-top:12px">
+        <strong>Common mistake to avoid:</strong> If your “This means…” sentence is basically the evidence with synonyms, it’s still repetition.
+        Make it interpretive: what does the evidence <em>suggest</em>, <em>imply</em>, or <em>complicate</em>?
+      </div>
     </section>
 
     <section class="card" id="check" style="margin-top:14px">
       <h2>4) Self-check before you submit</h2>
       <div class="checklist">
         <label><input type="checkbox"> I filled out my name/class/date at the top.</label>
-        <label><input type="checkbox"> I included evidence + a citation placeholder (BLS, OOH, etc.).</label>
+        <label><input type="checkbox"> I pasted an excerpt from my actual draft (with my original in-text citation).</label>
+        <label><input type="checkbox"> I copied my evidence sentence (with my original in-text citation) into the Evidence box.</label>
+        <label><input type="checkbox"> I pasted my original analysis sentence(s) (the part I’m revising).</label>
         <label><input type="checkbox"> I wrote all 3 required analysis sentences (means/matters/connects).</label>
-        <label><input type="checkbox"> My analysis adds meaning, not just repetition.</label>
         <label><input type="checkbox"> I chose one analysis move and wrote an extra sentence.</label>
         <label><input type="checkbox"> I saved as a PDF and uploaded it to Canvas.</label>
       </div>
@@ -441,16 +471,48 @@
       }
     })();
 
-    // Sorting practice content
+    // Sorting practice content (with evidence + after sentence)
     const sortItems = [
-      { text: "This shows nurses educate patients about health conditions.", key: "R" },
-      { text: "This suggests nurses need strong communication skills in addition to medical knowledge.", key: "A" },
-      { text: "This means nursing jobs are projected to grow.", key: "R" },
-      { text: "This matters because projected growth may increase opportunities, but it does not guarantee high pay or low stress.", key: "A" },
-      { text: "This shows nurses can work in many different settings.", key: "R" },
-      { text: "This connects to my claim by showing the career can offer flexibility depending on the setting someone chooses.", key: "A" },
-      { text: "This means nurses often work long shifts.", key: "R" },
-      { text: "This complicates the idea that the career is automatically a good fit, because long shifts can impact work-life balance.", key: "A" }
+      {
+        evidence: "The BLS states that registered nurses educate patients and the public about various health conditions. (BLS)",
+        after: "This shows nurses educate patients and the public about health conditions.",
+        key: "R"
+      },
+      {
+        evidence: "The BLS states that registered nurses educate patients and the public about various health conditions. (BLS)",
+        after: "This suggests communication is a major part of the job, not just medical tasks, which matters for students who dislike public-facing work.",
+        key: "A"
+      },
+      {
+        evidence: "The BLS reports that employment of registered nurses is projected to grow. (BLS)",
+        after: "This means nursing jobs are projected to grow.",
+        key: "R"
+      },
+      {
+        evidence: "The BLS reports that employment of registered nurses is projected to grow. (BLS)",
+        after: "This matters because growth can increase opportunities, but it does not guarantee that every nursing job has the same schedule, pay, or stress level.",
+        key: "A"
+      },
+      {
+        evidence: "The BLS notes that nurses work in settings such as hospitals, physicians’ offices, and schools. (BLS)",
+        after: "This shows nurses can work in hospitals, offices, and schools.",
+        key: "R"
+      },
+      {
+        evidence: "The BLS notes that nurses work in settings such as hospitals, physicians’ offices, and schools. (BLS)",
+        after: "This connects to my claim by showing the career can offer flexibility depending on the setting someone chooses.",
+        key: "A"
+      },
+      {
+        evidence: "Many nursing roles involve long shifts and being on your feet for extended periods. (Source)",
+        after: "This means nurses often work long shifts and are on their feet.",
+        key: "R"
+      },
+      {
+        evidence: "Many nursing roles involve long shifts and being on your feet for extended periods. (Source)",
+        after: "This complicates the idea that nursing is automatically a ‘good fit,’ because the physical demands can affect work-life balance and burnout risk.",
+        key: "A"
+      }
     ];
 
     const sortList = document.getElementById("sortList");
@@ -466,7 +528,9 @@
         const div = document.createElement("div");
         div.className = "practiceItem";
         div.innerHTML = `
-          <div><strong>${i+1}.</strong> ${escapeHtml(item.text)}</div>
+          <div class="small"><strong>${i+1}.</strong> Evidence:</div>
+          <div class="evidenceBox">${escapeHtml(item.evidence)}</div>
+          <div style="margin-top:10px"><strong>After-evidence sentence:</strong> ${escapeHtml(item.after)}</div>
           <div class="row">
             <span class="tag">Choose: R / A</span>
             <select aria-label="Choose R or A">
@@ -538,7 +602,6 @@
       const means = (document.getElementById("meansBox").value || "").trim();
       const matters = (document.getElementById("mattersBox").value || "").trim();
       const connects = (document.getElementById("connectsBox").value || "").trim();
-      const move = (document.getElementById("moveBox").value || "").trim();
       const msg = document.getElementById("checkMsg");
 
       const missing = [];
@@ -562,12 +625,7 @@
         return;
       }
 
-      if(move && move.toLowerCase().includes("this shows")){
-        msg.textContent = "Reminder: “This shows…” often turns into repetition. Try implication, tradeoff, limitation, or connection to your claim.";
-        return;
-      }
-
-      msg.textContent = "Looks good. Make sure your “connects” sentence clearly links back to your claim.";
+      msg.textContent = "Looks good. Make sure your “connects” sentence clearly links back to your claim or main point.";
     });
 
     // Copy all work
@@ -577,8 +635,10 @@
         ["Class/Section", document.getElementById("studentClass").value],
         ["Date", document.getElementById("studentDate").value],
         ["Topic", document.getElementById("studentTopic").value],
-        ["Claim", document.getElementById("claimBox").value],
-        ["Evidence", document.getElementById("evidenceBox").value],
+        ["Original draft excerpt", document.getElementById("draftExcerpt").value],
+        ["Evidence (with original in-text citation)", document.getElementById("evidenceBox").value],
+        ["Original analysis sentence(s)", document.getElementById("oldAnalysisBox").value],
+        ["Claim (optional)", document.getElementById("claimBox").value],
         ["This means", document.getElementById("meansBox").value],
         ["This matters because", document.getElementById("mattersBox").value],
         ["This connects to my claim by", document.getElementById("connectsBox").value],
